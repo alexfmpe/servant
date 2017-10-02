@@ -3,6 +3,8 @@ jobs:
   build:
     machine: true
 
+    parallelism: 5
+
     steps:
       - checkout
       - run: yamls=(
