@@ -11,7 +11,7 @@ jobs:
           stack.yaml
           stack-ghc-8.2.1.yaml
           stack-ghcjs-0.2.1.9007019.yaml
-         ) && echo $yamls && echo ${yamls[$CIRCLE_NODE_INDEX]} && echo 'export STACK_YAML=${yamls[$CIRCLE_NODE_INDEX]}' >> $BASH_ENV
+         ) && echo "export STACK_YAML=${yamls[$CIRCLE_NODE_INDEX]}" >> $BASH_ENV
       - run: echo $STACK_YAML
       - run: cat $BASH_ENV
 
