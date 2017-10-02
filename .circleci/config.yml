@@ -11,7 +11,7 @@ jobs:
         
     steps:
       - checkout
-      - run: 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
+      - run: echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
       - run: sudo apt-get install libgmp-dev
       - run: mkdir -p ~/.local/bin
       - run: curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
