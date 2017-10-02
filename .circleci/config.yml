@@ -11,7 +11,7 @@ jobs:
         
     steps:
       - checkout
-      - run: apt-get install libgmp-dev
+      - run: sudo apt-get install libgmp-dev
       - run: |
           mkdir -p ~/.local/bin
           export PATH=$HOME/.local/bin:$PATH
