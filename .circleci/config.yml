@@ -11,8 +11,9 @@ jobs:
           stack.yaml
           stack-ghc-8.2.1.yaml
           stack-ghcjs-0.2.1.9007019.yaml
-         ) && echo 'export STACK_YAML=${yamls[1]}' >> $BASH_ENV
+         ) && echo $yamls && echo ${yamls[1]} && echo 'export STACK_YAML=${yamls[1]}' >> $BASH_ENV
       - run: echo $STACK_YAML
+      - run: cat $BASH_ENV
 
       - run: echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
       - run: sudo apt-get install libgmp-dev
