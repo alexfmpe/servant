@@ -5,13 +5,15 @@ jobs:
 
     steps:
       - checkout
-      - run: echo '
-                   stack-ghc-7.8.4.yaml
-                   stack-ghc-7.10.3.yaml
-                   stack.yaml
-                   stack-ghc-8.2.1.yaml
-                   stack-ghcjs-0.2.1.9007019.yaml' >> ~/.yamlfilename
-      - run: cat ~/.yamlfilename
+      - run: yamls =
+         (
+          stack-ghc-7.8.4.yaml
+          stack-ghc-7.10.3.yaml
+          stack.yaml
+          stack-ghc-8.2.1.yaml
+          stack-ghcjs-0.2.1.9007019.yaml
+         ) && echo 'export STACK_YAML=${yamls[$CIRCLE_NODE_INDEX]}' >> $BASH_ENV
+      - run: echo $STACK_YAML
 
       - run: echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
       - run: sudo apt-get install libgmp-dev
