@@ -3,7 +3,7 @@ jobs:
   build:
     machine: true
 
-    parallelism: 5
+    parallelism: 4
 
     steps:
       - checkout
