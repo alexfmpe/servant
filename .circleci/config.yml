@@ -1,7 +1,4 @@
 aliases: &build
-    machine: 
-      environment: 
-        STACK_YAML: stack-ghc-7.8.4.yaml
     steps: 
       - checkout
       - run: "echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV"
@@ -56,10 +53,3 @@ workflows:
 #  directories:
 #    - $HOME/.tinc/cache
 #    - $HOME/.stack
-
-#language: c
-
-#addons:
-#  apt:
-#    packages:
-#      - libgmp-dev
