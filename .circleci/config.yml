@@ -2,6 +2,7 @@ aliases: &build
     steps: 
       - checkout
       - run: "echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV"
+      - run: "echo 'export STACK_YAML=$CIRCLE_JOB"
       - run: "sudo apt-get install libgmp-dev"
       - run: "mkdir -p ~/.local/bin"
       - run: "curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'"
@@ -15,41 +16,21 @@ aliases: &build
 
 version: 2
 jobs:
-  stack-ghc-7.8.4:
-    <<: *build
-    machine:
-      environment:
-        STACK_YAML: stack-ghc-7.8.4.yaml
-  stack-ghc-7.10.3:
-    <<: *build
-    machine:
-      environment:
-        STACK_YAML: stack-ghc-7.10.3.yaml
-  stack:
-    <<: *build
-    machine:
-      environment:
-        STACK_YAML: stack.yaml
-  stack-ghc-8.2.1:
-    <<: *build
-    machine:
-      environment:
-        STACK_YAML: stack-ghc-8.2.1.yaml
-  stack-ghcjs-0.2.1.9007019:
-    <<: *build
-    machine:
-      environment:
-        STACK_YAML: stack-ghcjs-0.2.1.9007019.yaml
+  stack-ghc-7.8.4.yaml: *build
+  stack-ghc-7.10.3.yaml: *build
+  stack.yaml: *build
+  stack-ghc-8.2.1.yaml: *build
+  stack-ghcjs-0.2.1.9007019.yaml: *build
         
 workflows:
   version: 2
   build_all:
     jobs:
-      - stack-ghc-7.8.4
-      - stack-ghc-7.10.3
-      - stack
-      - stack-ghc-8.2.1
-      - stack-ghcjs-0.2.1.9007019
+      - stack-ghc-7.8.4.yaml
+      - stack-ghc-7.10.3.yaml
+      - stack.yaml
+      - stack-ghc-8.2.1.yaml
+      - stack-ghcjs-0.2.1.9007019.yaml
       
 #cache:
 #  directories:
