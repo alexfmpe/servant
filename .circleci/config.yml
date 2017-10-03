@@ -2,18 +2,18 @@ aliases: &build
     machine: true
     steps: 
       - checkout
-      - run: "echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV"
-      - run: "echo 'export STACK_YAML=$CIRCLE_JOB' >> $BASH_ENV" 
-      - run: "sudo apt-get install libgmp-dev"
-      - run: "mkdir -p ~/.local/bin"
-      - run: "curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'"
-      - run: "stack --version"
-      - run: "echo $STACK_YAML"
-      - run: "cat $STACK_YAML"
-      - run: "stack setup --no-terminal"
-      - run: "cd $HOME/.local/bin && wget https://zalora-public.s3.amazonaws.com/tinc && chmod +x tinc"
-      - run: "if [ \"$STACK_YAML\" = \"stack-ghc-8.2.1.yaml\" ]; then HOMEMODULES=\"--ghc-options=-Wno-missing-home-modules\"; fi"
-      - run: "if [ \"$TRAVIS_EVENT_TYPE\" = \"cron\" ] ; then ./scripts/ci-cron.sh ; else stack test $HOMEMODULES --ghc-options=-Werror --no-terminal ; fi"
+      - run: echo "export PATH=$HOME/.local/bin:$PATH" >> $BASH_ENV
+      - run: echo "export STACK_YAML=$CIRCLE_JOB" >> $BASH_ENV
+      - run: sudo apt-get install libgmp-dev
+      - run: mkdir -p ~/.local/bin
+      - run: curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+      - run: stack --version
+      - run: echo $STACK_YAML
+      - run: cat $STACK_YAML
+      - run: stack setup --no-terminal
+      - run: cd $HOME/.local/bin && wget https://zalora-public.s3.amazonaws.com/tinc && chmod +x tinc
+      - run: if [ "$STACK_YAML" = "stack-ghc-8.2.1.yaml" ]; then HOMEMODULES="--ghc-options=-Wno-missing-home-modules"; fi
+      - run: if [ "$TRAVIS_EVENT_TYPE" = "cron" ] ; then ./scripts/ci-cron.sh ; else stack test $HOMEMODULES --ghc-options=-Werror --no-terminal ; fi
 
 version: 2
 jobs:
